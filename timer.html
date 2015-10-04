@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title> setTimeout </title>
+  <meta charset="utf-8">
+  <script>
+
+    var count = 1;
+    
+    // rewrite the code above here so that it displays a counter once every
+    // 10 seconds. The console should show the numbers 1 - 10.
+
+        // give our function a name so we can call it from within the timeout
+        var timer = setTimeout(function counter() {
+            console.log(count);
+            count++;
+            // only run if the count is less than or equal to ten
+            if (count <= 10) {
+              // call our function again with a timeout
+              setTimeout(counter, 10000)
+            }
+        }, 10000);
+
+  </script>
+</head>
+<body>
+</body>
+</html>        

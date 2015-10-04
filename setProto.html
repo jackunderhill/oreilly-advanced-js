@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+  <title> Shapes with Prototypes and Inheritance: Setting the prototype yourself </title>
+  <meta charset="utf-8">
+  <script>
+    var shape = {
+        x: 0,
+        y: 0,
+        area: 0,
+        setPosition: function(x, y) {
+            this.x = x;
+            this.y = y;
+        },
+        displayInfo: function() {
+            console.log("Your shape has area " + Math.ceil(this.area) + ", and is located at " + this.x + ", " + this.y);
+        }
+    };
+
+    function Circle(radius) {
+        this.radius = radius;
+        this.computeArea = function() {
+            this.area = Math.PI * (this.radius * this.radius);
+        };
+    }
+
+    function Square(size) {
+        this.size = size;
+        this.computeArea = function() {
+            this.area = this.size * this.size;
+        };
+    }
+
+    Circle.prototype = shape;
+    Square.prototype = shape;
+
+    var circle = new Circle(50);
+    circle.setPosition(100, 100);
+    circle.computeArea();
+    circle.displayInfo();
+
+    var square = new Square(50);
+    square.setPosition(300, 300);
+    square.computeArea();
+    square.displayInfo();
+  </script>
+</head>
+<body>
+</body>
+</html>     

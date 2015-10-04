@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+    <title>Object Prototypes Project: Books, 1</title>
+    <meta charset="utf-8">
+    <style>
+        .mystery {
+            background-color: rosybrown;
+        }
+        .fantasy {
+            background-color: mistyrose;
+        }
+    </style>
+    <script>
+
+        // Something to think about as you work on this project: "Which of the properties did you create using the Book() constructor and which did you add to the Book.prototype?"
+        // All of these properties (genre, title, author, published, hasMovie, display() and toString()) were added to the Book() constructor and none of these were added to the Book.prototype
+
+        // the Book() constructor
+        function Book(genre, title, author, published, hasMovie) {
+            this.genre = genre;
+            this.title = title;
+            this.author = author;
+            this.published = published;
+
+            if (typeof hasMovie === 'boolean') {
+                this.hasMovie = hasMovie
+            }
+            // a method that displays the object in the console
+            // this.display = function() {
+            //     console.log(this)
+            // }
+            // // a method that returns a string describing the book
+            // this.toString = function() {
+            //     var movie = this.hasMovie ? ' It has been adapted into a movie or TV show.' : '';
+            //     return this.title + ' is a ' + this.genre + ', written by ' + this.author + ' and published in ' + this.published + '.' + movie
+            // }
+        }
+
+        // Q: So how might .display and .toString be added to the prototype of Book()?
+        // A: You could add those two functions to the prototype of Book(), instead of adding them into the Book() constructor, with:
+
+        Book.prototype.display = function() {
+            console.log(this)
+        }
+        Book.prototype.toString = function() {
+            var movie = this.hasMovie ? ' It has been adapted into a movie or TV show.' : '';
+            return this.title + ' is a ' + this.genre + ', written by ' + this.author + ' and published in ' + this.published + '.' + movie
+        }
+
+        window.onload = function() {
+                // create an array of book objects
+                var books = [];
+
+                // create the books
+                var book1 = new Book('mystery', 'I Let You Go', 'Clare Mackintosh', 2015, false);
+                var book2 = new Book('thriller', 'The Girl on the Train', 'Paula Hawkins', 2015, false);
+                var book3 = new Book('fantasy', 'The Hobbit', 'J. R. R. Tolkien', 1937, true);
+
+                // add books to array
+                books.push(book1, book2, book3);
+
+                // add to page
+                for(var i = 0; i < books.length; i++) {
+                    addToPage(books[i]);
+                }
+
+        };
+
+        function addToPage(book) {
+                var booksList = document.getElementById("books");
+                var bookItem = document.createElement("li");
+
+                // add mystery of fantasy classes
+                if (book.genre === 'mystery') {
+                    bookItem.className = 'mystery'
+                }
+                else if (book.genre === 'fantasy') {
+                    bookItem.className = 'fantasy'
+                }
+
+                bookItem.innerHTML = book.toString();
+                booksList.appendChild(bookItem);
+        }
+    </script>
+</head>
+<body>
+<ul id="books">
+</ul>
+</body>
+</html>

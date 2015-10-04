@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+  <title>Bug</title>
+  <meta charset="utf-8">
+  <style>
+    html, body {
+        margin: 0px;
+        padding: 0px;
+    }
+    div#container {
+        position: relative;
+    }
+    div.bug {
+        position: absolute;
+        width: 100px;
+        height: 76px;
+        -webkit-transition: -webkit-transform 1s;
+        -moz-transition: -moz-transform 1s;
+        -o-transition: -o-transform 1s;
+        transition: transform 1s;
+        background: url(ladybug.png) center center no-repeat;
+    }
+    .up {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    .down {
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+    .right {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+    .left {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+  </style>
+  <script>
+
+    // The bug object will have one public method: moveBug(). The method will take one argument, the keycode of the key a user presses
+
+    
+
+    // Your constructor should create the bug
+    // give it a unique id
+    // create an element to represent the bug in the page
+    // set up all the code to move the bug in the correct direction depending on which key the user presses
+    // All variables and functions in the constructor should be private, except for the moveBug() method.
+    function Bug() {
+        var el = null
+
+        this.moveBug = function(key) {
+
+            // j = 106 (down)            
+            if (key === 106) updatePosition('down')
+
+            // k = 107 (up)
+            if (key === 107) updatePosition('up')
+            
+            // h = 104 (left)
+            if (key === 104) updatePosition('left')
+
+            // l = 108 (right)
+            if (key === 108) updatePosition('right')
+        }
+
+        createElement()
+
+        // create the element for the bug
+        function createElement() {
+            el = document.createElement('div')
+            el.className = 'bug'
+            el.style.height = '76px'
+            el.style.width = '100px'
+
+            addToPage()
+        }
+
+        // add the new element to the page and centre it
+        function addToPage() {
+            document.getElementById('container').appendChild(el)
+            el.style.top = (window.innerHeight/2) - 38 + 'px'
+            el.style.left = (window.innerWidth/2) - 50 + 'px'
+        }
+
+        function updatePosition(pos) {
+
+            if (el.className === 'bug ' + pos) {
+                chooseDirection(pos)
+            }
+            else {
+                // if the bug is changing direction, delay the move so it has time to rotate
+                el.className = 'bug ' + pos
+                setTimeout(function(){chooseDirection(pos)}, 1000)
+            }
+            
+        }
+
+        function chooseDirection(pos) {
+
+            // If the user presses j, move the bug down by a few pixels
+            if (pos === 'down') {
+                el.style.top = parseInt(el.style.top, 10) + 10 + 'px'
+            }
+
+            // if the user presses k, move the bug up a few pixels
+            else if (pos === 'up') {
+                el.style.top = parseInt(el.style.top, 10) - 10 + 'px'
+            }
+
+            // if the user presses h, move the bug left a few pixels
+            else if (pos === 'left') {
+                el.style.left = parseInt(el.style.left, 10) - 10 + 'px'
+            }
+            
+            // if the user presses l, move the bug right a few pixels
+            else if (pos === 'right') {
+                el.style.left = parseInt(el.style.left, 10) + 10 + 'px'
+            }
+
+        }
+
+    }
+    
+    window.onload = function() {
+        var bug = new Bug('container');
+
+        // j = 106 (down), k = 107 (up), h = 104 (left) , l = 108 (right)
+        document.onkeypress = function(e) {
+            bug.moveBug((typeof e.which == 'number') ? e.which : e.keyCode);
+        }
+    };
+
+  </script>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+</html>    

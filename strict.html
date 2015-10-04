@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <title>  </title>
+  <meta charset="utf-8">
+  <script>
+    // "use strict";
+    // myVar = "I'm not declared!";
+    
+    (function() {
+        "use strict";
+        var innerMyVar = "I'm not declared in this function either.";
+        
+        var o = {
+           x: 3
+        };
+        
+        Object.defineProperty(o, "x", { writable: false });
+        o.x = 20;
+
+    })();
+  </script>
+</head>
+<body>
+</body>
+</html>

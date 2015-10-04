@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <title> Constructing objects </title>
+  <meta charset="utf-8">
+  <script>
+    function Book(title, author, published, hasMovie) {
+        this.title = title;
+        this.author = author;
+        this.published = published;
+        this.hasMovie = hasMovie;
+
+        this.display = function() {
+            console.log(this);
+        };
+    }
+    var book1 = new Book("The Hound of the Baskervilles", "Sir Arthur Conan Doyle", 1901, true);
+    book1.display();
+    
+    var book2 = {
+        title: "The Adventures of Sherlock Holmes",
+        author: "Sir Arthur Conan Doyle",
+        published: 1892,
+        movie: true,
+        display: function() {
+            console.log(this);
+        }
+    };
+    book2.display();
+    
+    var book3 = new Object(); // same as var book3 = { };
+    book3.title = "A Study in Scarlet";
+    book3.author = "Sir Arthur Conan Doyle";
+    book3.published = 1887;
+    book3.movie = false;
+    book3.display = function() {
+        console.log(this);
+    };
+    book3.display();
+    
+  </script>
+</head>
+<body>
+</body>
+</html>

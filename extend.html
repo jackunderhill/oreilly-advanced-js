@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+  <title>Advanced JavaScript Project: extend()</title>
+  <meta charset="utf-8">
+  <script>
+    function extend(obj1, obj2) {
+
+        // Extend bird1 by adding properties from bird2
+        // Loop through obj2 properties
+        for (p in obj2) {
+
+            // Check if a property key in obj2 matches one in obj1
+            if (!(p in obj1)) {
+                // if it doesn't, add property to obj1
+                obj1[p] = obj2[p];
+            }
+
+        }
+
+    }
+
+    var bird1 = {
+        name: "robin",
+        songbird: true
+    };
+
+    var bird2 = {
+        name: "ostrich",
+        songbird: false,
+        flies: false
+    };
+
+    var bird = {
+        phylum: "chordata",
+        class: "aves",
+        feathered: true,
+        flies: true
+    };
+
+    console.log("------ Extend with birds ------ ");
+    extend(bird1, bird);
+    console.log(bird1);
+
+    extend(bird2, bird);
+    console.log(bird2);
+  </script>
+</head>
+<body>
+</body>
+</html>

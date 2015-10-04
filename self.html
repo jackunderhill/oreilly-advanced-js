@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <title> Nested functions </title>
+  <meta charset="utf-8">
+  <script>             
+function outer() {
+    console.log("outer: ", this);
+    inner();
+
+    function inner() {
+        console.log("inner: ", this);
+    }
+}
+outer();
+
+function MakeObject() {
+    this.aProperty = 3;
+
+    console.log("outer object: ", this);
+
+    var self = this;
+    function inner() {
+        console.log("inner to object: ", self);
+    }
+    inner();
+}
+var outerObject = new MakeObject();
+  </script>
+</head>
+<body>
+</body>
+</html>     

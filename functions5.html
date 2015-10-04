@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Functions: Pass by value</title>
+  <meta charset="utf-8">
+  <script>
+      function changeNum(num) {
+          num = 3;
+      }
+      var myNum = 10;
+      changeNum(myNum);
+      console.log(myNum);
+
+      function changeObj(obj) {
+          obj.x = 3;
+          obj.z = 10;
+      }
+      var foo = {
+          x: 0,
+          y: 1
+      };
+      console.log("Before calling changeObj, foo is: ");
+      console.log(foo);
+
+      changeObj(foo);
+      console.log("After calling changeObj, foo is: ");
+      console.log(foo);
+  </script>
+</head>
+<body>
+</body>
+</html>

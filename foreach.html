@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>Functions: forEach</title>
+    <meta charset="utf-8">
+    <script>
+
+        // 1. Create an array of all zeros, named zeros
+        var zeros = [0, 0, 0, 0];
+
+        // Your function will take two arguments: the array, and the function to act on the array
+        function forEach(a, f) {
+            // forEach() loops through the array, in order, and invokes the function you pass in once for each element in the array
+            for (var i = 0; i < a.length; i++) {
+                // The function you pass in, f, is invoked with three arguments:
+                f(a[i], i, a)
+            }
+        }
+
+        // 2. Write a function, showArray(), that displays the value of each item in the array in the console, showing the index and the value at that index
+        function showArray(index, i, array) {
+            console.log('array[' + i + '] = ' + index);
+        }
+
+        // 3. Write a function, makeArrayRandom(), that generates a random number for each element of the array
+        function makeArrayRandom(index, i, array) {
+            // generate a random number
+            var num = Math.floor(Math.random() * 100);
+            // assign number to array index
+            array[i] = num;
+        }
+
+        // 4. Write a function, isNextGreater() that compares the value at each index of the array (except the last one) to the value at the next index;
+        function isNextGreater(index, i, array) {
+            var next = i + 1;
+            // compare the value to the next one
+            if (i < array.length - 1) {
+                // if the value at the next index is greater, change the value at the index to -1
+                if (index < array[next]) {
+                    array[i] = -1
+                }
+            }
+
+        }
+
+        // 5. Use the map() method to create a copy of the zeros array, in copyOfZeros
+        var copyOfZero = zeros.map(function(x) {
+            return x
+        });
+
+        // 6. Show that each of your functions works as it should by using your forEach() function to:
+        console.log('Foreach');
+
+        // 1. Display the zeros array with forEach(), using showArray()
+        console.log('Display the array');
+        forEach(zeros, showArray);
+
+        // 2. Call forEach() with the makeArrayRandom() function to change the zeros array to random numbers.
+        console.log('Random array:');
+        forEach(zeros, makeArrayRandom);
+        forEach(zeros, showArray);
+
+        // 3. Call forEach() with the isNextGreater() function to change the copyOfZeros array.
+        // The resulting values in copyOfZeros show which values in zeros are less than their neighbor values to the right.
+        console.log('Is next greater:');
+        console.log('Zeros array:');
+        forEach(zeros, isNextGreater);
+        forEach(zeros, showArray);
+
+    </script>
+</head>
+<body>
+</body>
+</html>

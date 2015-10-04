@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title>Max</title>
+  <meta charset="utf-8">
+  <script>
+    function max() {
+
+        var max = Number.NEGATIVE_INFINITY;
+        for (var i = 0; i < arguments.length; i++) {
+            if (arguments[i] > max) {
+                max = arguments[i];
+            }
+        }
+        return max;
+
+    }
+
+    console.log(max(99, -55, 101, 103, 22));
+
+  </script>
+</head>
+<body>
+</body>
+</html>

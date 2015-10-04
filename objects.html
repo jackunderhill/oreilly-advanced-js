@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title> Objects </title>
+  <meta charset="utf-8">
+  <script>
+    var person = {
+        name: "James T. Kirk",
+        birth: 2233,
+        isEgotistical: true,
+        ship: {
+            name: "USS Enterprise",
+            number: "NCC-1701",
+            commissioned: 2245
+        },
+        getInfo: function() {
+            return this.name + " commands the " + this.ship.name;
+        }
+    };
+    
+    for (var prop in person) {
+    	console.log(person[prop]);
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>          

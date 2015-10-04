@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>Creating Objects</title>
+  <meta charset="utf-8">
+  <script>
+    var Person = {
+        welcome: function() {
+            console.log("Welcome " + this.name + "!");
+        },
+        isAdult: function() {
+            if (this.age > 17) {
+                return true;
+            }
+        },
+        blah: 'blah'
+    };
+
+    var bob = Object.create(Person);
+    bob.name = "Bob Parsons";
+    bob.age = 42;
+
+    bob.welcome();
+    if (bob.isAdult()) {
+        console.log(bob.name + " can get a beer");
+    }
+
+    var mary = Object.create(Person);
+    mary.name = "Mary Smith";
+    mary.age = 12;
+
+    mary.welcome();
+    if (!mary.isAdult()) {
+        console.log("Sorry, " + mary.name + " can't get a beer");
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

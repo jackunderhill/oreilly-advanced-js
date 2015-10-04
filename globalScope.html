@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <title> Global Scope </title>
+  <meta charset="utf-8">
+  <script>
+    var globalScope1 = "Global";
+
+    //
+    // not using var to define a new variable is bad form! 
+    //
+    globalScope2 = "Global";
+
+    function f() {
+      globalScope3 = "Global";
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>  

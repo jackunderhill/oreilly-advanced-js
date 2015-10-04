@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <title>Functions as callbacks</title>
+  <meta charset="utf-8">
+  <script>
+    window.onload = function() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getLocation);
+      }
+      else {
+        console.log("Sorry, no Geolocation support!");
+        return;
+      }
+    };
+
+    function getLocation(position) {
+      var latitude = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      var div = document.getElementById("container");
+      div.innerHTML = "You are at lat: " + latitude + ", long: " + longitude;
+    }
+  </script>
+</head>
+<body>
+<div id="container"></div>
+</body>
+</html>

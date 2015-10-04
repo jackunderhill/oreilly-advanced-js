@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+  <title> What happens to this </title>
+  <meta charset="utf-8">
+  <script>
+    //
+    // Rectangle constructor that makes rectangle objects
+    //
+    function Rectangle(width, height) {
+        console.log("This in Rectangle is: ");
+        console.log(this);
+
+        this.width = width || 0;
+        this.height = height || 0;
+        this.getArea = function() {
+            console.log("This in Rectangle's getArea is: ");
+            console.log(this);
+            return this.width * this.height;
+        };
+    }
+    
+    var rect1 = new Rectangle(5, 10);
+    console.log("Area of rectangle 1: " + rect1.getArea());
+
+    //
+    // A function that makes rectangle objects
+    //
+    function makeRectangle(width, height) {
+        console.log("This in makeRectangle is: ");
+        console.log(this);
+
+        return { 
+            width: width || 0,
+            height: height || 0,
+            getArea: function() {
+                console.log("This in makeRectangle's getArea is: ");
+                console.log(this);
+                return this.width * this.height;
+            }
+        };
+    }
+
+    var rect2 = makeRectangle(5, 10);
+    console.log("Area of rectangle 2: " + rect2.getArea());
+
+    // getArea function
+    function getArea(r) {
+        console.log("This in getArea is: ");
+        console.log(this);
+        return (r.width * r.height);
+    }
+    console.log("Area from getArea(rect1): " + getArea(rect1));
+
+  </script>
+</head>
+<body>
+</body>
+</html>     

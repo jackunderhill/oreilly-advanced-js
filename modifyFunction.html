@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+  <title>Modifying functions</title>
+  <meta charset="utf-8">
+  <script>
+
+    // Write a function, modifyFunction(), that takes a function, f
+    function modifyFunction(f) {
+
+        return function() {
+            // if function returns undefined then return 'this',
+            // otherwise return the value returned from the function.
+            return (f.apply(null, arguments) === undefined) ? this : f.apply(null, arguments)
+
+        };
+
+    }
+
+    function add1(num1, num2) {
+        return num1 + num2;
+    }
+
+    function add2(num1, num2, num3) {
+        var num4 = num1 + num2 + num3;
+        // don't return anything
+    }
+
+    // add1() takes two numbers and returns a number, so add1New() should also return a number.
+    var add1New = modifyFunction(add1);
+    console.log(add1New(1, 2)); // should display 3
+
+    // However, add2() takes two numbers and doesn't return anything (meaning, it returns undefined), so add2New() should return this, which in this case will be the window object.
+    var add2New = modifyFunction(add2);
+    console.log(add2New(3, 4, 5)); // should display this (the window object)
+
+  </script>
+</head>
+<body>
+</body>
+</html>

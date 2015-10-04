@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <title>Calling a function</title>
+  <meta charset="utf-8">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script>
+    function callMeMaybe(number) {
+        return "Call me at " + number;
+    }
+
+    window.onload = function() {
+        var number = callMeMaybe("555-1212");
+        $("body").append("<div>" + number + "</div>");
+        alert("Content added");
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

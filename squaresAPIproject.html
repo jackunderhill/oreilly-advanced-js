@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <title> Squares with API </title>
+  <meta charset="utf-8">
+  <style>
+    .square {
+        background-color: lightblue;
+        cursor: pointer;
+    }
+    .square p {
+        padding-top: 35%;
+        text-align: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+  </style>
+  <script>       
+    function Square(size) {
+        var initialSize = size;
+        var el = null;
+        var id = getNextId();
+        var bg = null;
+
+        this.grow = function() {
+            setBigger(10);
+            setColor("red");
+        };
+
+        // public reset method
+        this.reset = function() {
+
+            // set height and width back to initial size
+            size = 0;
+            setBigger(initialSize);
+
+            // set background colour back to original colour
+            setColor("lightblue");
+
+        }
+
+        var self = this;
+        display();
+
+        function setBigger(growBy) {
+            if (el) {
+                size += growBy;
+                el.style.width = size + "px";
+                el.style.height = size + "px";
+            }
+        }
+
+        function setColor(color) {
+            if (el) {
+                el.style.backgroundColor = color;
+            }
+        }
+
+        function display() {
+            el = document.createElement("div");
+            el.setAttribute("id", id);
+            el.setAttribute("class", "square");
+            el.style.width = size + "px";
+            el.style.height = size + "px";
+            el.innerHTML = "<p>" + id + "</p>";
+            el.onclick = self.grow;
+
+            // get background color for original square
+            bg = el.style.backgroundColor
+
+            document.getElementById("squares").appendChild(el);
+        }
+
+        function getNextId() {
+            var squares = document.querySelectorAll(".square");
+            if (squares) {
+                return squares.length;
+            }
+            return 0;
+        }
+    }
+    
+    window.onload = function() {
+        var square1 = new Square(100);
+        var square2 = new Square(200);
+
+        var growButton = document.getElementById("growButton"),
+            resetButton = document.getElementById('resetButton')
+
+        growButton.onclick = function() {
+            square1.grow();
+            square2.grow();
+        };
+
+        // set up click handler with reset methods for each square
+        resetButton.onclick = function() {
+            square1.reset()
+            square2.reset()
+        }
+    };
+  </script>
+</head>
+<body>
+<form>
+    <input type="button" id="growButton" value="Grow!">
+    <input type="button" id="resetButton" value="Reset">
+</form>
+<div id="squares"></div>
+</body>
+</html>  

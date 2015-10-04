@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <title>Functions</title>
+  <meta charset="utf-8">
+  <script>
+
+    var computeArea = function(radius) {
+        var area = radius * radius * Math.PI;
+        return area;
+    };
+
+    var circleArea = computeArea(3);
+    console.log("Area of circle with radius 3: " + circleArea);
+    circleArea = computeArea(5);
+    console.log("Area of circle with radius 5: " + circleArea);
+    circleArea = computeArea(7);
+    console.log("Area of circle with radius 7: " + circleArea);
+
+
+    // function computeArea(radius) {
+    //     var area = radius * radius * Math.PI;
+    //     return area;
+    // }
+
+  </script>
+</head>
+<body>
+</body>
+</html>

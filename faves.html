@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+    <title>Advanced JavaScript Project: Favorites and Tags</title>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Helvetica, Ariel, sans-serif;
+        }
+        form {
+            display: table;
+            border-spacing: 5px;
+        }
+        form p {
+            display: table-row;
+        }
+        form label {
+            display: table-cell;
+            text-align: right;
+        }
+        form input {
+            display: table-cell;
+            min-width: 200px;
+        }
+        span.comment {
+            font-size: 80%;
+            color: #777777;
+        }
+        span.tags {
+            font-size: 80%;
+            color: rgb(48, 99, 170);
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+    <script>
+
+    window.onload = init;
+
+    // Empty object to hold all of our favourite objects
+    var allFavourites = {};
+
+    // Object constructor for eachnew object
+    function Favourite(url,title,comment,tags) {
+        this.url = url;
+        this.title = title;
+        this.comment = comment;
+        this.tags = tags;
+        // Display favourites method
+        this.displayFavourite = function() {
+            var results = document.getElementById('results');
+
+            // Create a new result list element with all of our details that were just passed into the object constructor
+            var li = document.createElement('li');
+            li.innerHTML = '<li><a href="' + this.url + '" title="' + this.title + '">' + this.title + '</a><br><span class="comment">' + this.comment + '</span><br><span class="tags">Tags: ' + this.tags + '</span></li>';
+
+            // Append each new favourite so that we don't have update every favourite in allFavourites each time
+            results.appendChild(li);
+
+            // Add the new object to the allFavourites object
+            var i = Object.keys(allFavourites).length; // note: won't work in <IE9
+            allFavourites[i] = this;
+
+            // Reset form
+            document.forms[0].reset();
+
+            // Display all the favourites we've added
+            console.log('All Favourites:');
+            console.log(allFavourites)
+        }
+    }
+
+    function init() {
+        // Create a new favourite object when the button is clicked
+        var submit = document.getElementById('btn');
+        submit.onclick = getFavourite
+    }
+
+    function getFavourite() {
+        var url = document.form.url.value,
+            title = document.form.title.value,
+            comment = document.form.comment.value,
+            tags = document.form.tags.value;
+
+        // Alert the user if they don't enter a title
+        if (title.length < 1) {
+            alert('Please enter a title for your favourite');
+            // Return out of the function before the new object is created
+            return
+        }
+
+        // Create a new favourite object
+        var fave = new Favourite(url,title,comment,tags);
+        // Display the new object in the list
+        fave.displayFavourite()
+    }
+
+    </script>
+</head>
+<body>
+
+    <h1>Tag and Save Your Favourites</h1>
+
+    <form name="form">
+        <fieldset>
+            <legend>Add A New Favourite</legend>
+            <p>
+                <label for="url">URL:</label>
+                <input type="text" name="url" id="url" placeholder="http://www.example.com">
+            </p>
+            <p>
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" placeholder="Website Title">
+            </p>
+            <p>
+                <label for="comment">Comment:</label>
+                <input type="text" name="comment" id="comment" placeholder="What do you think of this link?">
+            </p>
+            <p>
+                <label for="tags">Tags:</label>
+                <input type="text" name="tags" id="tags" placeholder="Enter tags separated by commas">
+            </p>
+            <button type="button" id="btn">Add Link</button>
+        </fieldset>
+    </form>
+
+    <h2>List of Favourites</h2>
+    <ul id="results"></ul>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <title>Hoisting</title>
+  <meta charset="utf-8">
+  <script>
+    var icecream = ["vanilla", "chocolate", "strawberry"];
+    function init() {
+        var flavorButton = document.getElementById("getFlavorButton");
+        flavorButton.onclick = checkFlavor;
+    }
+    function checkFlavor() {
+        console.log(flavor);
+        if (icecream.length > 0) {
+            var div = document.getElementById("container");
+            var flavor = document.getElementById("flavor").value;
+            if (flavor) {
+                for (var i = 0; i < icecream.length; i++) {
+                    if (icecream[i] == flavor) {
+                        var found = true;
+                        div.innerHTML = "We have " + flavor;
+                        break;
+                    }
+                }
+                if (!found) {
+                    div.innerHTML = "Sorry, we don't have " + flavor;
+                }
+            }
+        }
+        console.log(flavor);
+    }
+    window.onload = init;
+  </script>
+</head>
+<body>
+<div id="container">Enter a flavor of ice cream you'd like: </div>
+<form>
+    <input type="text" id="flavor">
+    <input type="button" id="getFlavorButton" value="Check flavor">
+</form>
+</body>
+</html>

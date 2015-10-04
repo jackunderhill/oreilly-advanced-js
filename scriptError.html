@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <title> Script Testing </title>
+  <meta charset="utf-8">
+  <script>      
+    window.onload = function() { 
+        document.onclick = function() {
+            alert("You clicked on the web page!");
+        }
+        var div = document.getElementById("div1");
+        for (var i = 0; i < 100000000000; i++) {
+           div.innerHTML += i + ",";
+        }
+    }
+  </script>
+</head>
+<body>
+  <div id="div1"></div>
+</body>
+</html> 

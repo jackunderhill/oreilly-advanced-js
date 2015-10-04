@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+  <title> Initializing objects </title>
+  <meta charset="utf-8">
+  <script>
+    function Point(x, y) {
+        this.x = (!x && x != 0) ? 50 : x;
+        this.y = (!y && y != 0) ? 50 : y;
+
+        // Make a toString() method we can use to display the point
+        this.toString = function() {
+            return "[" + this.x + ", " + this.y + "]";
+        }
+    }
+    
+    // Can have code in constructors too
+    var p = new Point();
+    console.log("My point is: " + p.toString());
+
+  </script>
+</head>
+<body>
+</body>
+</html>  

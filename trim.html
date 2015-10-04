@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+    <title>Advanced JavaScript Project: trim()</title>
+    <meta charset="utf-8">
+    <script>
+      
+        // TESTS
+        // If you pass a string like "  I'm funny    ", the function returns "I'm funny".
+        console.log('[' + trim("  I'm funny    ") + ']')
+
+        // If you pass a string like "I'm funny", the function returns "I'm funny" (that is, the original string).
+        console.log('[' + trim("I'm funny") + ']')
+
+        // If you pass the string "", the function returns "".
+        console.log('[' + trim("") + ']')
+
+        // If you pass any other value (null, 3, [1, 2], etc.), the function returns "".
+        console.log('[' + trim(3) + ']')
+        console.log('[' + trim(null) + ']')
+
+        // I would normally use the trim() method but if I had to support <IE9,
+        // which the objectives hints seem to suggest, I would do the following.
+        function trim(arg) {
+
+            if (typeof arg === 'string') {
+
+                var left = 0;
+                var right = arg.length - 1
+
+                // Find the amount of leading white space
+                while (arg[left] === ' ') {   
+                    left++
+                }
+
+                // Find the amount of trailing whitespace
+                while (arg[right] === ' ') {
+                    right--
+                }
+
+                // Return trimmed string or the original string if there's no whitespace
+                return arg.substring(left, right + 1)
+            }
+
+            else {
+                // Return an error if a type other than a string was passed to the function
+                return ''
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+  <title>Functions: Returning a function from a function</title>
+  <meta charset="utf-8">
+  <style>
+    html, body, div#container {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    div#container1, div#container2 {
+        position: relative;
+        height: 400px;
+        border: 1px solid black;
+    }
+    .red {
+        position: absolute;
+        width: 175px;
+        height: 175px;
+        background-color: red;
+    }
+    .blue {
+        position: absolute;
+        width: 175px;
+        height: 175px;
+        background-color: lightblue;
+    }
+  </style>
+  <script>
+
+    window.onload = init;
+
+    // event handler for the window load event to add several <div> elements to the page in the two containers
+    function init() {
+        var container1 = addDivTo('container1'),
+            container2 = addDivTo('container2');
+
+        container1('red');
+        container1('blue');
+        container1('red');
+
+        container2('blue');
+        container2('red');
+        container2('blue');
+    }
+
+    // The function returned should take one argument, a string representing a CSS class.
+    function addDivTo(id) {
+        return function(cssClass) {
+            // get container
+            var container = document.getElementById(id);
+
+            // create new div
+            var div = document.createElement('div');
+
+            // add class
+            div.className = cssClass;
+
+            // add position
+            div.style.left = Math.floor(Math.random() * (container.offsetWidth - 175)) + "px";
+            div.style.top = Math.floor(Math.random() * (container.offsetHeight - 175)) + "px";
+
+            // add div into container with id
+            document.getElementById(id).appendChild(div);
+
+            return div;
+        }
+    }
+
+  </script>
+</head>
+<body>
+    <div id="container1"></div>
+    <div id="container2"></div>
+</body>
+</html>

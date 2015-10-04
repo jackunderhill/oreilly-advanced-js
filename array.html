@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+  <title>Advanced JavaScript Project: Constructing Array Objects</title>
+  <meta charset="utf-8">
+  <script>
+
+    // Create an array, myArray, with some values, and display the array in the console
+    var myArray = ['one', 'two', 3, 4, 5, true];
+    console.log(myArray);
+
+    // Add two named properties to the array, myArray: name and list(). name is a string property with a short name for the array
+    var name = 'Fred';
+    myArray.push(name);
+
+    // list() is a method that uses a for loop and the array indices to loop through the array and display all the values in the array
+    function list() {
+        console.log('------');
+        console.log('list():');
+        for (var i = 0; i < myArray.length; i++) {
+            console.log(myArray[i])
+        }
+    }
+    myArray.push(list);
+
+    // Call the list() method to display the values in the array.
+    myArray[list()];
+
+    // Takes an array, and display all the properties of the array object using a for/in loop and bracket notation.
+    function displayArray(array) {
+        console.log('------');
+        console.log('displayArray():');
+        for (i in array) {
+            console.log(array[i])
+        }
+    }
+
+    // Call the displayArray() function to display the properties in the array.
+    displayArray(myArray);
+
+    // Comments
+    // There is no difference in the output in the console between these two ways of displaying array properties. This is what I expected though, so am I missing something?
+
+  </script>
+</head>
+<body>
+</body>
+</html>  

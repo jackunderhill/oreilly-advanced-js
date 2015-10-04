@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+  <title>Counter</title>
+  <meta charset="utf-8">
+  <script>
+    // run in strict mode
+    'use strict'
+
+    var counterModule = (function(initialValue) {
+        var counter = initialValue;
+
+        return {
+            increment: function() {
+                counter++;
+            },
+            decrement: function() {
+                counter--;
+            },
+            reset: function() {
+                counter = 0;
+            },
+            getValue: function() {
+                return counter;
+            }
+        };
+    })(0);
+
+    window.onload = function() {
+
+        // make sure that none of the public properties in the counter can be modified
+        Object.freeze(counterModule)
+
+        // verify that if you try to modify any of the public properties, you are not able to
+        // counterModule.increment = 'test' // returns read only error
+
+        counterModule.increment();
+        counterModule.increment();
+        counterModule.decrement();
+        counterModule.increment();
+        console.log(counterModule.getValue());
+        counterModule.reset();
+
+        // make sure your counter still works
+        counterModule.increment()
+        console.log(counterModule.getValue()) // should return 1
+
+        counterModule.decrement()
+        console.log(counterModule.getValue()) // should return 0
+    }; 
+  </script>
+</head>
+<body>
+</body>
+</html>

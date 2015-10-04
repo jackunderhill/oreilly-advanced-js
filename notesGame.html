@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+  <title> Scope </title>
+  <meta charset="utf-8">
+  <style>
+    html {
+        height: 100%;
+    }
+    body {
+        height: 100%;
+        margin: 0px;
+        font-family: Helvetica, sans-serif;
+    }
+    div#container {
+        margin: auto;
+        width: 300px;
+    }
+    form {
+        margin-top: 20%;
+    }
+    form input[type="text"] {
+        font-size: 120%;
+        text-align: center;
+    }
+    form input[type="button"] {
+        background-color: lightblue;
+        font-size: 110%;
+    }
+  </style>
+  <script>
+
+    var notesGame = {};
+
+    window.onload = function() {
+
+	var buttons = document.getElementsByClassName("btn");
+	
+	for(var i = 0; i < buttons.length; i++) {
+	    buttons[i].onclick = notesGame.addNote;
+	}
+
+    }
+
+    // Delaring our function as a property of our apps object so that
+    // it doesn't conflict with any libraries we may add in the future
+    notesGame.addNote = function(event) {
+        // get display box and set up valid chords
+        var box = document.getElementById('notesDisplay'),
+            validChords = {
+                C: "CEG",
+                F: "FAC",
+                G: "GBD"
+            };
+
+        // reset message in case it's already display a valid/invalid message
+        document.getElementById('message').innerHTML = 'Enter a major triad chord:';
+
+        // each time a note is clicked, add the note to 'notesDisplay'
+        // if there are less than three notes notes displayed
+        if (box.value.length < 2 ) {
+            // add note to box
+            box.value += event.target.value
+        }
+        else if (box.value.length === 2){
+            // add last note
+            box.value += event.target.value
+            // after three notes, check for valid chord
+            checkChord();
+        }
+
+        // nesting this function as it only needs to be accessed from addNote and not delcared in global scope
+        function checkChord() {
+            var i = 0;
+
+            // loop through the valid chords
+            for (key in validChords) {
+
+                // if value matches a valid chord
+                if (box.value === validChords[key]) {
+                    // display message
+                    document.getElementById('message').innerHTML = box.value + ' is a ' + key + ' chord';
+                    // stop checking if valid chord is found
+                    break;
+                }
+                else {
+                    // if value does not match a valid chord
+                    document.getElementById('message').innerHTML = box.value + ' is not a valid chord';
+                }
+            }
+
+            // After checking, it should display a message in the "message" <div> (replacing the existing text), and reset the form for the next chord
+            box.value = '';
+            
+        }
+    }
+  </script>
+</head>
+<body>
+<div id="container">
+<form>
+<p id="message">Enter a major triad chord:</p>
+<p>
+    <input id="notesDisplay" type="text" size="21">
+</p>
+<p>
+    <input id="c" type="button" value="C" class="btn">
+    <input id="d" type="button" value="D" class="btn">
+    <input id="e" type="button" value="E" class="btn">
+    <input id="f" type="button" value="F" class="btn">
+    <input id="g" type="button" value="G" class="btn">
+    <input id="a" type="button" value="A" class="btn">
+    <input id="b" type="button" value="B" class="btn">
+</p>
+</form>
+</div>
+</body>
+</html>   

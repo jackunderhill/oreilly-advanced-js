@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+    <title>Object Prototypes Project: Books, 1</title>
+    <meta charset="utf-8">
+    <style>
+        .mystery {
+            background-color: rosybrown;
+        }
+        .fantasy {
+            background-color: mistyrose;
+        }
+    </style>
+    <script>
+
+        // Q: Notice the difference between using one type of constructor to create all the books and using the genre property
+        //    to distinguish between the type of book, and having multiple types of books (by using a different constructor for each book).
+        //    Do we still need the genre property? Which method of creating books do you prefer?
+        //    Can you see advantages of one way over the other? Again, add some comments to your code that describe this.
+
+        // A: We don't really need the genre property now that there is a separate constuctor for each book genre,
+        //    as we can just check for an 'instanceof' the genre. I prefer the previous method where we had a genre property, as overall,
+        //    it took less code to implement. However if I knew there would be thousands of books created, it would be worth using
+        //    this method to save the memory needed to create separate instances of the genre in each book object. So for scaling up an
+        //    application, I can see the advantages of using genre-based constructors, even though it results in a few more lines of code.
+
+        window.onload = function() {
+            // create an array of book objects
+            var books = [];
+
+            // create the books
+            var book1 = new MysteryBook('I Let You Go', 'Clare Mackintosh', 2015, false);
+            var book2 = new ThrillerBook('The Girl on the Train', 'Paula Hawkins', 2015, false);
+            var book3 = new FantasyBook('The Hobbit', 'J. R. R. Tolkien', 1937, true);
+
+            // add books to array
+            books.push(book1, book2, book3);
+
+            // add to page
+            for(var i = 0; i < books.length; i++) {
+                addToPage(books[i]);
+            }
+
+        };
+
+        // the MysteryBook() constructor
+        function MysteryBook(genre, title, author, published, hasMovie) {
+            this.title = title;
+            this.author = author;
+            this.published = published;
+
+            if (typeof hasMovie === 'boolean') {
+                this.hasMovie = hasMovie
+            }
+        }
+
+        // the ThrillerBook() constructor
+        function ThrillerBook(title, author, published, hasMovie) {
+            this.title = title;
+            this.author = author;
+            this.published = published;
+
+            if (typeof hasMovie === 'boolean') {
+                this.hasMovie = hasMovie
+            }
+        }
+
+        // the FantasyBook() constructor
+        function FantasyBook(title, author, published, hasMovie) {
+            this.title = title;
+            this.author = author;
+            this.published = published;
+
+            if (typeof hasMovie === 'boolean') {
+                this.hasMovie = hasMovie
+            }
+        }
+
+        addToProto(MysteryBook, 'mystery');
+        addToProto(ThrillerBook, 'thriller');
+        addToProto(FantasyBook, 'fantasy');
+
+        // I've moved the genre into each book consructor, along with the methods, as these are consistent
+        // and will save memory by referencing just the one insance of these. This also goes in a function
+        // so that it doesn't need repeating for every type of book constructor that is created.
+        function addToProto(constructor, genre) {
+            constructor.prototype.genre = genre;
+            // a method that displays the object in the console
+            constructor.prototype.display = function() {
+                console.log(this)
+            }
+            // a method that returns a string describing the book
+            constructor.prototype.toString = function() {
+                var movie = this.hasMovie ? ' It has been adapted into a movie or TV show.' : '';
+                return this.title + ' is a ' + this.genre + ', written by ' + this.author + ' and published in ' + this.published + '.' + movie
+            }
+        }
+
+        function addToPage(book) {
+            var booksList = document.getElementById("books");
+            var bookItem = document.createElement("li");
+
+            // add mystery and fantasy classes
+            if (book instanceof MysteryBook) {
+                bookItem.className = 'mystery'
+            }
+            else if (book instanceof FantasyBook) {
+                bookItem.className = 'fantasy'
+            }
+
+            bookItem.innerHTML = book.toString();
+            booksList.appendChild(bookItem);
+        }
+    </script>
+</head>
+<body>
+<ul id="books">
+</ul>
+</body>
+</html>

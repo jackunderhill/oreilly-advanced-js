@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+  <title> What happens to this? </title>
+  <meta charset="utf-8">
+  <style>
+    .square {
+        background-color: lightblue;
+        cursor: pointer;
+    }
+    .circle {
+        background-color: orange;
+        cursor: pointer;
+    }
+    .square p, .circle p {
+        padding-top: 35%;
+        text-align: center;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+  </style>
+  <script>
+
+    function Square(id, name, size) {
+        console.log("This at the top of the Square constructor: ");
+        console.log(this);
+        this.id = id;
+        this.name = name;
+        this.size = size;
+        this.numClicks = 0;
+
+        this.display = function() {
+            var el = document.getElementById(this.id);
+            el.style.width = this.size + "px";
+            el.style.height = this.size + "px";
+            el.innerHTML = "<p>" + this.name + "</p>";
+            console.log(this.name + " has size " + this.size +
+                ", and is a " + this.constructor.name);
+        };
+
+    }
+    
+    function Circle(id, name, radius) {
+        this.id = id;
+        this.name = name;
+        this.radius = radius;
+        this.numClicks = 0;
+
+        this.display = function() {
+            var el = document.getElementById(this.id);
+            el.style.width = (this.radius * 2) + "px";
+            el.style.height = (this.radius * 2) + "px";
+            el.style.borderRadius = this.radius + "px";
+            el.innerHTML = "<p>" + this.name + "</p>";
+            console.log(this.name + " has radius " + this.radius +
+                ", and is a " + this.constructor.name);
+        };
+
+    }
+    
+    function click() {
+        console.log("This in click function: ");
+        console.log(this);
+        this.numClicks++;
+        document.getElementById("counter_" + this.id).innerHTML =
+            "You've clicked " + this.numClicks + " times on " + this.name;
+    }
+    
+    window.onload = function() {
+        var square = new Square("s1", "square one", 100);
+        setupClickHandler(square);
+        square.display();
+        
+        var circle = new Circle("c1", "circle one", 50);
+        setupClickHandler(circle);
+        circle.display();
+    }
+    function setupClickHandler(shape) {
+        var elDiv = document.getElementById(shape.id);
+        elDiv.onclick = function() {
+            console.log("This in click handler: ");
+            console.log(this);
+            click.call(shape);
+        };
+    }
+  </script>
+</head>
+<body>
+  <div id="s1" class="square"></div>
+  <div id="c1" class="circle"></div>
+  <p id="counter_s1"></p>
+  <p id="counter_c1"></p>
+</body>
+</html> 

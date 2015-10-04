@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+    <title>Advanced JavaScript Project: equals() (version 2)</title>
+    <meta charset="utf-8">
+    <script> 
+
+        function Book(title, author, published, hasMovie) {
+            this.title = title;
+            this.author = author;
+            this.published = published;
+            this.hasMovie = hasMovie;
+            this.equals = function(o) {
+
+                // If you pass null or undefined for the object, the result is false
+                if (!o) {
+                    return false
+                }
+
+                // If object is empty, return false
+                if (!Object.keys(o).length) {
+                    return false;
+                }
+
+                for (p in o) {
+                    // If any of the properties is an object or a method, the result is false
+                    // If object has no propeties, return false
+                    if (typeof p === 'object' || typeof p === 'function' || typeof p === 'undefined') {
+                        return false
+                    }
+
+                    // If the objects have different property names, the result is false
+                    // If the objects have the same property names but different property values, the result is false
+                    // Only return false if checking properties that aren't this function
+                    if (o[p] !== this[p] && typeof this[p] !== 'function') {
+                        return false
+                    }
+                }
+                
+                return true
+
+            };
+        }
+
+        var book1 = new Book("Harry Potter", "JK Rowling", 1999, true);
+        var book2 = new Book("Harry Potter", "JK Rowling", 1999, true);
+        var book3 = new Book("The Adventures of Sherlock Holmes", "Sir Arthur Conan Doyle", 1892, true);
+        
+        // Test cases for the equals() method
+        console.log("Compare book1, book2 with equals method: ");
+        
+        if (book1.equals(book2)) {
+            console.log("The two books are the same");
+        } else {
+            console.log("The two books are different");
+        }
+        
+        console.log("Compare book1, book3 with equals method: ");
+        
+        if (book1.equals(book3)) {
+            console.log("The two books are the same");
+        } else {
+            console.log("The two books are different");
+        }
+        
+        if (!book1.equals(null)) { console.log("Book1 and null are not the same."); }
+        if (!book1.equals(undefined)) { console.log("Book1 and undefined are not the same."); }
+        if (!book1.equals({})) { console.log("Book1 and { } are not the same."); }
+
+    </script>
+</head>
+<body>
+</body>
+</html>  

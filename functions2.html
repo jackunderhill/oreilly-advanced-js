@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>First Class Functions</title>
+  <meta charset="utf-8">
+  <script>
+    var myArray = [1, 2, 3];
+    var newArray = myArray.map(function(x) { return x+1; });
+    console.log(newArray);
+
+    function map(a, f) {
+        var newArray = [];
+        for (var i = 0; i < a.length; i++) {
+            newArray.push(f(a[i]));
+        }
+        return newArray;
+    }
+
+    function addOne(x) {
+        return x+1;
+    }
+
+    var newArray2 = map(myArray, addOne);
+    console.log(newArray2);
+
+    var newArray3 = map(myArray, function(x) { return x+1; });
+    console.log(newArray3);
+  </script>
+</head>
+<body>
+</body>
+</html>
